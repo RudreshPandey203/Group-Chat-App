@@ -4,6 +4,7 @@ import { useState } from "react";
 function ChatBox({ socket, username }) {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messages, setMessages] = useState([]);
+    const [prevmssg, setPrevmssg] = useState("");
 
     const sendMessage = async() => {
         if (currentMessage && currentMessage !== "") {
@@ -12,20 +13,34 @@ function ChatBox({ socket, username }) {
                 message: currentMessage,
                 time : new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes() + ":" + new Date(Date.now()).getSeconds()
             };
-            console.log(messageData);
-            // socket.emit("chat_message", JSON.stringify(messageData));
-            setCurrentMessage("");
+
             setMessages((messages) => [...messages, messageData]);
 
             await socket.emit("chat_message", JSON.stringify(messageData));
+            console.log("sent message : ",messageData);
+            setCurrentMessage("");
         }
     }
 
+    // useEffect(() => {
+    //     socket.on("chat_message_recieve", (msg) => {
+    //         const messageData = JSON.parse(msg);
+    //         console.log("recieved message : ",messageData);
+    //         setMessages((messages) => [...messages, messageData]);
+    //         console.log(messages)
+    //     });
+    // }, []);
     useEffect(() => {
-        socket.on("chat_message_recieve", (msg) => {
+        const handleReceivedMessage = (msg) => {
             const messageData = JSON.parse(msg);
-            setMessages((messages) => [...messages, messageData]);
-        });
+            setMessages((prevMessages) => [...prevMessages, messageData]);
+        };
+
+        socket.on("chat_message_recieve", handleReceivedMessage);
+
+        return () => {
+            socket.off("chat_message_recieve", handleReceivedMessage);
+        };
     }, [socket]);
 
   return (

@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
     socket.on('chat_message', (msg) => {
         const messageData = JSON.parse(msg);
         console.log('message: ' + messageData.message);
-        socket.broadcast('chat_message_recieve', JSON.stringify(messageData));
+        socket.broadcast.emit('chat_message_recieve', JSON.stringify(messageData));
     });
 });
 
