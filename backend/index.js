@@ -18,11 +18,16 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('user disconnected - ', socket.id);
     });
-    socket.on('chat message', (msg) => {
-        console
-        io.emit('chat message', msg);
-    }
-    );
+
+    socket.on('join_chat', (username) => {
+        console.log(`User ${username} joined the chat`);
+    });
+
+    socket.on('chat_message', (msg) => {
+        const messageData = JSON.parse(msg);
+        console.log('message: ' + messageData.message);
+        socket.broadcast('chat_message_recieve', JSON.stringify(messageData));
+    });
 });
 
 
