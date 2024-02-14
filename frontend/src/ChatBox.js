@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useRef } from "react";
 
 function ChatBox({ socket, username }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [userList, setUserList] = useState([]);
+  const inputRef = useRef(null);
+
 
   const sendMessage = async () => {
     if (currentMessage && currentMessage.trim() !== "") {
@@ -17,6 +20,13 @@ function ChatBox({ socket, username }) {
 
       await socket.emit("chat_message", JSON.stringify(messageData));
       setCurrentMessage("");
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      sendMessage();
     }
   };
 
@@ -92,11 +102,13 @@ function ChatBox({ socket, username }) {
         </div>
         <div className="footer h-[5vh]">
           <input
+            ref={inputRef}
             className="p-2 w-[75vw] text-2xl rounded-l-sm h-[7vh]  bg-gray-100 text-black"
             name="message"
             placeholder="Type your message"
             value={currentMessage}
             onChange={(event) => setCurrentMessage(event.target.value)}
+            onKeyPress={handleKeyPress}
           />
           <button
             className="p-2 w-[5vw] relative bottom-[3px] h-[7vh] bg-blue-500 text-white rounded-r-sm"
