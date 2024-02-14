@@ -22,19 +22,17 @@ function App() {
     }
   };
 
-  useEffect(() => {
 
   const handleUserLeave = () => {
     socket.emit("leave_chat", username);
-
-    handleUserLeave();
-  }},[chat])
+    setChat(false);
+  }
 
   return (
     <div className="bg-black h-[100vh] text-white ">
       <div className="flex justify-between p-3">
         <h1 className="p-2 text-4xl">Chat App</h1>
-        {chat && <button className="m-3 bg-red-600 p-2 rounded-md" onClick={()=>{  setChat(false)}}>Leave Chat</button>
+        {chat && <button className="m-3 bg-red-600 p-2 rounded-md" onClick={handleUserLeave}>Leave Chat</button>
 }
       </div>
       {!chat && <div className="h-[80vh] text-center flex flex-col justify-center items-center">

@@ -39,6 +39,7 @@ function ChatBox({ socket, username }) {
     return () => {
       socket.off("user_list", handleUserList);
     };
+    handleUserList();
   }, [socket]);
 
   useEffect(() => {
