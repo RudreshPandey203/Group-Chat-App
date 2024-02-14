@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import ChatBox from "./ChatBox";
+import { useRef } from "react";
 
 const socket = io("http://localhost:4000");
 
@@ -8,6 +9,15 @@ function App() {
   const [username, setUsername] = useState("");
   const [chat, setChat] = useState(false);
   const [userError, setUserError] = useState(false);
+  const inputRef = useRef(null);
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      joinChat();
+    }
+  };
+
 
   const joinChat = () => {
     if (username.trim() !== "") {
@@ -46,6 +56,7 @@ function App() {
               setUsername(event.target.value);
             }}
             required
+            onKeyPress={handleKeyPress}
           />
           {userError && (
             <p className="text-red-500 p-1 float">Please enter a valid username</p>
