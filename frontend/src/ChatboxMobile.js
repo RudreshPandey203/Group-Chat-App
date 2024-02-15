@@ -57,7 +57,7 @@ function ChatBox({ socket, username }) {
               ) : (
                 <>
                 {message.username == username ? (
-                  <div className="bg-blue-400 m-2 rounded-2xl p-3 right-0 flex-wrap w-full">
+                  <div className="bg-blue-700 m-2 rounded-2xl p-3 right-0 flex-wrap w-full">
                   <h3 className="text-[2rem]">~You</h3>
                   <p className="text-[1.5rem]">{message.message}</p>
                   <p className="text-xs">{message.time}</p>
