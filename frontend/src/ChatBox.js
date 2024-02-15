@@ -103,7 +103,7 @@ function ChatBox({ socket, username }) {
         <div className="footer h-[5vh]">
           <input
             ref={inputRef}
-            className="p-2 w-[75vw] text-2xl rounded-l-sm h-[7vh]  bg-gray-100 text-black"
+            className="p-2 w-[74.1vw] text-2xl rounded-l-sm h-[7vh]  bg-gray-100 text-black"
             name="message"
             placeholder="Type your message"
             value={currentMessage}
@@ -111,7 +111,7 @@ function ChatBox({ socket, username }) {
             onKeyPress={handleKeyPress}
           />
           <button
-            className="p-2 w-[5vw] relative bottom-[3px] h-[7vh] bg-blue-700 hover:bg-blue-500 text-white rounded-r-sm"
+            className="p-2 w-[5vw] relative bottom-[0.3vh] h-[7vh] bg-blue-700 hover:bg-blue-500 text-white rounded-r-sm"
             onClick={sendMessage}
           >
             Send
