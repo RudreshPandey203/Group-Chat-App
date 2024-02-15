@@ -10,7 +10,7 @@ const users = [];
 
 const io = new Server(server, {
     cors: {
-        origin: "https://group-chat-app-ruddy.vercel.app/",
+        origin: "*",
         methods: ["GET", "POST"]
     }
 });
