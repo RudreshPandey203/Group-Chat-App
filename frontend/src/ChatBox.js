@@ -57,7 +57,7 @@ function ChatBox({ socket, username }) {
   }, [socket]);
 
   return (
-    <div className="chatBox flex h-[90vh] overflow-hidden">
+    <div className="chatBox flex h-[89vh] overflow-hidden">
       <div className="w-1/5 bg-black p-3 flex flex-col">
         <h1 className="text-3xl text-white p-4 mx-auto">Users</h1>
         {userList.map((user, index) => (
