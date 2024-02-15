@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
-import ChatboxMobile from './ChatboxMobile'
+import React, { useEffect, useState, useRef } from "react";
+
 function ChatBox({ socket, username }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [userList, setUserList] = useState([]);
   const inputRef = useRef(null);
 
   const sendMessage = async () => {
@@ -22,26 +19,12 @@ function ChatBox({ socket, username }) {
     }
   };
 
-  const isMobile = window.innerWidth <= 768; 
-
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       sendMessage();
     }
   };
-
-  useEffect(() => {
-    const handleUserList = (userList) => {
-      setUserList(JSON.parse(userList));
-    };
-
-    socket.on("user_list", handleUserList);
-
-    // return () => {
-    //   socket.off("user_list", handleUserList);
-    // };
-  }, [socket,messages]);
 
   useEffect(() => {
     const handleReceivedMessage = (msg) => {
@@ -58,29 +41,16 @@ function ChatBox({ socket, username }) {
   }, [socket]);
 
   return (
-    <div>
-      {isMobile ? (
-        <ChatboxMobile socket={socket} username={username}/>
-      ) : (
-    
-    <div className="chatBox flex h-[89vh] overflow-hidden">
-      <div className="w-1/5 bg-black p-3 flex flex-col">
-        <h1 className="text-3xl text-white p-4 mx-auto">Users</h1>
-        {userList.map((user, index) => (
-          <div key={index} className="text-white">
-            <p className="hover:bg-white hover:text-gray-800 rounded-md p-2 text-2xl">{user.username}</p>
-          </div>
-        ))}
-      </div>
-      <div className="w-4/5 h-[90vh]">
-        <div className="head h-[5vh] bg-gray-100 p-2">
-          <h1 className="text-gray-700">Live Chat</h1>
+    <div className="chatBox h-[90vh] flex bg-red-600 overflow-y-auto">
+      <div className="w-full ">
+        <div className="head sticky z-1 h-[5vh] bg-gray-100 p-2">
+          <h1 className="text-gray-700 float">Live Chat</h1>
         </div>
-        <div className="body h-[78vh] text-2xl flex flex-col overflow-y-auto bg-gray-300 p-3">
+        <div className="body text-xl flex flex-col h-[80vh] overflow-y-auto bg-gray-300 p-3">
           {messages.map((message, index) => (
             <div
               key={index}
-              className="flex flex-col"
+              className="flex flex-col mr-3"
             >
               {message.username === "Admin" ? (
                 <p className="text-gray-500 mx-auto">{message.message}</p>
@@ -106,10 +76,10 @@ function ChatBox({ socket, username }) {
             </div>
           ))}
         </div>
-        <div className="footer h-[5vh]">
+        <div className="flex items-center justify-between">
           <input
             ref={inputRef}
-            className="p-2 w-[75vw] text-2xl rounded-l-sm h-[7.3vh] absolute bottom-0 bg-gray-100 text-black"
+            className="p-2 w-full rounded-l-sm h-[5vh] bg-gray-100 text-black absolute bottom-0"
             name="message"
             placeholder="Type your message"
             value={currentMessage}
@@ -117,7 +87,7 @@ function ChatBox({ socket, username }) {
             onKeyPress={handleKeyPress}
           />
           <button
-            className="p-2 w-[5vw] absolute bottom-0 right-0 h-[7.3vh] bg-blue-700 hover:bg-blue-500 text-white rounded-r-sm"
+            className="p-2 w-[25%] h-[5vh] bg-blue-700 hover:bg-blue-500 text-white rounded-r-sm absolute bottom-0 right-0"
             onClick={sendMessage}
           >
             Send
@@ -125,8 +95,6 @@ function ChatBox({ socket, username }) {
         </div>
       </div>
     </div>
-      )}
-      </div>
   );
 }
 

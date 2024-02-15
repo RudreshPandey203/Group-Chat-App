@@ -39,8 +39,8 @@ function App() {
   }
 
   return (
-    <div className="bg-black h-[100vh] text-white ">
-      <div className="flex justify-between p-3">
+    <div className="bg-black h-[100vh] text-white overflow-hidden">
+      <div className="flex justify-between p-3 sticky top-0 h-[10vh]">
         <h1 className="p-2 text-4xl">Chat App</h1>
         {chat && <button className="m-3 bg-red-600 p-2 rounded-md" onClick={handleUserLeave}>Leave Chat</button>
 }
@@ -49,7 +49,7 @@ function App() {
         <h1 className="p-5 text-5xl">Enter your Username</h1>
 
         <div>
-          <input className="rounded-md p-2 m-3 w-[20vw] h-16 text-gray-700 text-3xl font-semibold" type="text"
+          <input className="rounded-md p-2 m-3 lg:w-[20vw] h-16 text-gray-700 text-3xl md:w-[60vh] font-semibold" type="text"
             name="username"
             placeholder="John"
             onChange={(event) => {
