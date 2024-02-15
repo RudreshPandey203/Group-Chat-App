@@ -57,7 +57,7 @@ function ChatBox({ socket, username }) {
   }, [socket]);
 
   return (
-    <div className="chatBox flex h-[90vh]">
+    <div className="chatBox flex h-[90vh] overflow-hidden">
       <div className="w-1/5 bg-black p-3 flex flex-col">
         <h1 className="text-3xl text-white p-4 mx-auto">Users</h1>
         {userList.map((user, index) => (
@@ -103,7 +103,7 @@ function ChatBox({ socket, username }) {
         <div className="footer h-[5vh]">
           <input
             ref={inputRef}
-            className="p-2 w-[75vw] text-2xl rounded-l-sm h-[7.2vh]  bg-gray-100 text-black"
+            className="p-2 w-[75vw] text-2xl rounded-l-sm h-[7.3vh] absolute bottom-0 bg-gray-100 text-black"
             name="message"
             placeholder="Type your message"
             value={currentMessage}
@@ -111,7 +111,7 @@ function ChatBox({ socket, username }) {
             onKeyPress={handleKeyPress}
           />
           <button
-            className="p-2 w-[5vw] absolute bottom-0 right-0 h-[7.2vh] bg-blue-700 hover:bg-blue-500 text-white rounded-r-sm"
+            className="p-2 w-[5vw] absolute bottom-0 right-0 h-[7.3vh] bg-blue-700 hover:bg-blue-500 text-white rounded-r-sm"
             onClick={sendMessage}
           >
             Send
