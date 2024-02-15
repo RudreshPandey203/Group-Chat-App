@@ -10,7 +10,7 @@ const users = [];
 
 const io = new Server(server, {
     cors: {
-        origin: "https://rudresh-group-chat.netlify.app",
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });
