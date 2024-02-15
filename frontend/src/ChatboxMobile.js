@@ -41,7 +41,7 @@ function ChatBox({ socket, username }) {
   }, [socket]);
 
   return (
-    <div className="chatBox h-[90vh] flex bg-red-600 overflow-y-auto">
+    <div className="chatBox h-[90vh] flex overflow-y-auto">
       <div className="w-full ">
         <div className="head sticky z-1 h-[5vh] bg-gray-100 p-2">
           <h1 className="text-gray-700 float">Live Chat</h1>

@@ -42,14 +42,14 @@ function App() {
     <div className="bg-black h-[100vh] text-white overflow-hidden">
       <div className="flex justify-between p-3 sticky top-0 h-[10vh]">
         <h1 className="p-2 text-4xl">Chat App</h1>
-        {chat && <button className="m-3 p-2 rounded-md" onClick={handleUserLeave}>Leave Chat</button>
+        {chat && <button className="m-3 bg-red-600 p-2 rounded-md" onClick={handleUserLeave}>Leave Chat</button>
 }
       </div>
       {!chat && <div className="h-[80vh] text-center flex flex-col justify-center items-center">
         <h1 className="p-5 text-5xl">Enter your Username</h1>
 
         <div>
-          <input className="rounded-md p-2 m-3 lg:w-[20vw] h-16 text-gray-700 text-3xl md:w-[20vh] font-semibold" type="text"
+          <input className="rounded-md p-2 m-3 w-[30vw] h-16 text-gray-700 text-3xl font-semibold" type="text"
             name="username"
             placeholder="John"
             onChange={(event) => {
