@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import ChatBox from "./ChatBox";
 import { useRef } from "react";
 
-const socket = io("http://localhost:4000");
+const socket = io("https://group-chat-backend-0twv.onrender.com");
 
 function App() {
   const [username, setUsername] = useState("");
